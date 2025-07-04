@@ -2,62 +2,59 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🎥 Live Trại Gà Vân Phong</title>
+  <title>Live Vega CDN - Trại Gà Vân Phong</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
       background: #000;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: Arial, sans-serif;
-    }
-    h1 {
-      color: #fff;
-      font-size: 1.2rem;
-      margin: 16px 0;
-      text-align: center;
-    }
-    .video-container {
-      position: relative;
-      width: 100%;
-      max-width: 960px;
-      aspect-ratio: 16 / 9;
-      background: #000;
-      border-radius: 8px;
       overflow: hidden;
     }
-    video {
-      position: absolute;
-      width: 100%;
-      height: 100%;
+    #video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
       background: #000;
+    }
+    .watermark {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 120px;
+      opacity: 0.85;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .wrapper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
     }
   </style>
 </head>
 <body>
-  <h1>🎥 Đang phát trực tiếp từ Trại Gà Vân Phong</h1>
-  <div class="video-container">
-    <video id="video" controls autoplay playsinline muted></video>
+  <div class="wrapper">
+    <video id="video" controls autoplay muted playsinline></video>
+    <img class="watermark" src="https://lvphonglv.github.io/live-vega/xxg.jpg" alt="watermark" />
   </div>
 
   <script>
-    const video = document.getElementById("video");
-    const videoSrc = "https://1053215a7d1.vws.vegacdn.vn/live/_definst_/stream_9_7db6c6f2/playlist.m3u8";
+    const video = document.getElementById('video');
+    const videoSrc = 'https://1053215a7d1.vws.vegacdn.vn/live/_definst_/stream_9_7db6c6f2/playlist.m3u8';
 
     if (Hls.isSupported()) {
       const hls = new Hls();
       hls.loadSource(videoSrc);
       hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = videoSrc;
-      video.addEventListener("loadedmetadata", () => video.play());
+      video.addEventListener('loadedmetadata', function () {
+        video.play();
+      });
     }
   </script>
 </body>
