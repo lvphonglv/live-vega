@@ -17,27 +17,10 @@
       object-fit: cover;
       background: #000;
     }
-    .watermark {
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      width: 120px;
-      opacity: 0.85;
-      z-index: 10;
-      pointer-events: none;
-    }
-    .wrapper {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <video id="video" controls autoplay muted playsinline></video>
-    <img class="watermark" src="https://lvphonglv.github.io/live-vega/xxg.jpg" alt="watermark" />
-  </div>
+  <video id="video" controls autoplay muted playsinline></video>
 
   <script>
     const video = document.getElementById('video');
